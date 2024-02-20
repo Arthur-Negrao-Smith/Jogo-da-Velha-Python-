@@ -16,8 +16,23 @@ class Jogo:
             itens = ''
             for coluna in range(0, 2):
                 itens += self.tabuleiro[linha][coluna] # Vai checar todas as linhas para saber se ganhou
-            if itens.count(opcao, 0, 2) == 3:
+            if itens == 'XXX' or 'OOO':
                 print('ganhou')
+                ganhar = True
+        for coluna in range(0, 2):
+            itens = ''
+            for linha in range(0, 2):
+                itens += self.tabuleiro[linha][coluna] # Vai checar todas as colunas e e guarda uma por uma na variável
+            if itens == 'XXX' or 'OOO':
+                print('Ganhou')
+                ganhar = True
+        if self.tabuleiro[0][0] == self.tabuleiro[1][1] and self.tabuleiro[2][2]: # Vai checar a diagonal da esquerda superior até a direita inferior
+            print('Ganhou')
+            ganhar = True
+        elif self.tabuleiro[0][2] == self.tabuleiro[1][1] and self.tabuleiro[2][0]: # vai checar a diagonal da esquerda inferior até a direita superior
+            print('Ganhou')
+            ganhar = True
+
 
     def player_comeca(self) -> bool:
         """Define quem começa a jogar"""
