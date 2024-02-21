@@ -35,16 +35,14 @@ class Jogo:
                 ganhar = True
                 break
             else:
-                break # Quebra o laço caso (ganhar) ainda for false
-        if ganhar == False:
-            print('Perdeu')
+                break # Quebra o laço e (ganhar) ainda é False
         return ganhar
 
     def player_comeca(self) -> bool:
         """Define quem começa a jogar"""
-        comeca = randint(0, 1)
-        if comeca == 0:
-            print('player começa')
+        comeca = randint(1, 2)
+        if comeca == 1:
+            print('Player começa')
             self.opcao_player = self.opcoes[1]
             self.opcao_pc = self.opcoes[2]
             return True
@@ -61,7 +59,7 @@ class Jogo:
                 print(f'{linha[0]}  {linha[1]}  {linha[2]} ')
         print(f"{self.glamour:=^7}")
     
-    def escolha_pessoa(self) -> int:
+    def escolha_pessoa(self) -> bool:
         """Onde a pessoa vai escolher"""
         try:
             while True:
@@ -88,7 +86,7 @@ class Jogo:
             print('Valor inválido')
             return True
         
-    def jogar_pc(self) -> list:
+    def jogar_pc(self) -> None:
         """Define a jogada do PC"""
         while True:
             self.jogada_pc_tipo = self.opcao_pc
@@ -97,3 +95,27 @@ class Jogo:
             if self.tabuleiro[self.jogada_pc_linha][self.jogada_pc_coluna] == '0':
                 self.tabuleiro[self.jogada_pc_linha][self.jogada_pc_coluna] = self.jogada_pc_tipo
                 break
+
+    def deve_continuar(self) -> bool:
+        """Pergunta se a pessoa deseja continuar"""
+        while True:
+            resposta = str(input('Você deseja jogar novamente? [S/N] ')).strip()
+            if resposta == '':
+                print('Resposta inválida')
+                return
+            if resposta in 'SsSIMSimsim' or resposta in 'NnNÃOnãonao':
+                while True:
+                    if resposta in 'SsSIMSimsim':
+                        print('CARREGANDO...')
+                        continua = True
+                        break
+                    elif resposta in 'NnNÃOnãonao':
+                        print('FECHANDO JOGO...')
+                        continua = False
+                        break
+                    print('Resposta inválida')
+                    break
+                break
+            else:
+                print('Resposta inválida')
+        return continua
