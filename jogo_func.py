@@ -12,26 +12,33 @@ class Jogo:
 
     def ganhou(self, opcao='O') -> bool:
         """Serve para saber se ganhou"""
-        for linha in range(0, 2):
-            itens = ''
-            for coluna in range(0, 2):
-                itens += self.tabuleiro[linha][coluna] # Vai checar todas as linhas para saber se ganhou
-            if itens == 'XXX' or 'OOO':
-                print('ganhou')
+        ganhar = False
+        while not ganhar: # vai rodar enquando (ganhar) for igual a False
+            for linha in range(0, 3):
+                itens = ''
+                for coluna in range(0, 3):
+                    itens += self.tabuleiro[linha][coluna] # Vai checar todas as linhas para saber se ganhou
+                if itens == opcao*3:
+                    ganhar = True
+                    break
+            for coluna in range(0, 3):
+                itens = ''
+                for linha in range(0, 3):
+                    itens += self.tabuleiro[linha][coluna] # Vai checar todas as colunas e e guarda uma por uma na variável
+                if itens == opcao*3:
+                    ganhar = True
+                    break
+            if self.tabuleiro[0][0] == opcao and self.tabuleiro[0][0] == self.tabuleiro[1][1] and self.tabuleiro[2][2]: # Vai checar a diagonal da esquerda superior até a direita inferior
                 ganhar = True
-        for coluna in range(0, 2):
-            itens = ''
-            for linha in range(0, 2):
-                itens += self.tabuleiro[linha][coluna] # Vai checar todas as colunas e e guarda uma por uma na variável
-            if itens == 'XXX' or 'OOO':
-                print('Ganhou')
+                break
+            elif self.tabuleiro[0][2] == opcao and self.tabuleiro[0][2] == self.tabuleiro[1][1] and self.tabuleiro[2][0]: # vai checar a diagonal da esquerda inferior até a direita superior
                 ganhar = True
-        if self.tabuleiro[0][0] == self.tabuleiro[1][1] and self.tabuleiro[2][2]: # Vai checar a diagonal da esquerda superior até a direita inferior
-            print('Ganhou')
-            ganhar = True
-        elif self.tabuleiro[0][2] == self.tabuleiro[1][1] and self.tabuleiro[2][0]: # vai checar a diagonal da esquerda inferior até a direita superior
-            print('Ganhou')
-            ganhar = True
+                break
+            else:
+                break # Quebra o laço caso ganhar ainda for false
+        if ganhar == False:
+            print('Perdeu')
+        return ganhar
 
 
     def player_comeca(self) -> bool:
@@ -73,12 +80,3 @@ class Jogo:
         self.jogada_pc_linha = randint(0, 2)
         self.jogada_pc_coluna = randint(0, 2)
         self.tabuleiro[self.jogada_pc_linha][self.jogada_pc_coluna] = self.jogada_pc_tipo
-
-jogo = Jogo()
-jogo.player_comeca()
-jogo.printar_tabuleiro()
-jogo.jogar_pc()
-jogo.printar_tabuleiro()
-a = jogo.escolha_pessoa()
-jogo.printar_tabuleiro()
-jogo.ganhou(opcao='O')
