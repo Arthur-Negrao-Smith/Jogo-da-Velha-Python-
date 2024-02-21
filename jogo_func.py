@@ -35,7 +35,7 @@ class Jogo:
                 ganhar = True
                 break
             else:
-                break # Quebra o laço caso ganhar ainda for false
+                break # Quebra o laço caso (ganhar) ainda for false
         if ganhar == False:
             print('Perdeu')
         return ganhar
@@ -67,14 +67,14 @@ class Jogo:
             while True:
                 self.jogada_pes_linha = int(input('Escolha sua linha: [1, 2, 3]: '))
                 self.jogada_pes_linha -= 1
-                if self.jogada_pc_linha == -1 or self.jogada_pc_linha == 0 or self.jogada_pc_linha == 1:
+                if self.jogada_pes_linha == 0 or self.jogada_pes_linha == 1 or self.jogada_pes_linha == 2:
                     break
                 else:
                     print('Escolha inválida')
             while True:
                 self.jogada_pes_coluna = int(input('Escolha uma coluna [1, 2, 3]: '))
                 self.jogada_pes_coluna -= 1
-                if self.jogada_pc_coluna == -1 and self.jogada_pc_coluna == 0 and self.jogada_pc_coluna == 1:
+                if self.jogada_pes_coluna == 0 or self.jogada_pes_coluna == 1 or self.jogada_pes_coluna == 2:
                     break
                 else:
                     print('Escolha inválida')
@@ -97,5 +97,3 @@ class Jogo:
             if self.tabuleiro[self.jogada_pc_linha][self.jogada_pc_coluna] == '0':
                 self.tabuleiro[self.jogada_pc_linha][self.jogada_pc_coluna] = self.jogada_pc_tipo
                 break
-            else:
-                continue

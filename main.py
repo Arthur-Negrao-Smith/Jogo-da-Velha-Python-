@@ -19,9 +19,13 @@ while loop:
                 continuar = jogo.escolha_pessoa()
             if volta >= 4:
                 partida = jogo.ganhou()
+                if not partida:
+                    print('O player ganhou')
             jogo.jogar_pc()
             if volta >= 4:
                 partida = jogo.ganhou()
+                if not partida:
+                    print('A máquina ganhou')
     else:
         partida = False
         while not partida:
@@ -30,9 +34,13 @@ while loop:
             jogo.printar_tabuleiro()
             if volta >= 4:
                 partida = jogo.ganhou()
+                if not partida:
+                    print('A máquina ganhou')
             continuar = True
             while continuar:
                 continuar = jogo.escolha_pessoa()
             if volta >= 4:
                 partida = jogo.ganhou()
+                if not partida:
+                    print('O player ganhou')
     break
