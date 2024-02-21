@@ -17,21 +17,21 @@ class Jogo:
             for linha in range(0, 3):
                 itens = ''
                 for coluna in range(0, 3):
-                    itens += self.tabuleiro[linha][coluna] # Vai checar todas as linhas para saber se ganhou
+                    itens += self.tabuleiro[linha][coluna] # Vai checar todas as linhas para saber se ganhou guardando temporariamente na variável
                 if itens == opcao*3:
                     ganhar = True
                     break
             for coluna in range(0, 3):
                 itens = ''
                 for linha in range(0, 3):
-                    itens += self.tabuleiro[linha][coluna] # Vai checar todas as colunas e e guarda uma por uma na variável
+                    itens += self.tabuleiro[linha][coluna] # Vai checar todas as colunas e guarda uma por uma temporariamente na variável
                 if itens == opcao*3:
                     ganhar = True
                     break
-            if self.tabuleiro[0][0] == opcao and self.tabuleiro[0][0] == self.tabuleiro[1][1] and self.tabuleiro[2][2]: # Vai checar a diagonal da esquerda superior até a direita inferior
+            if self.tabuleiro[0][0] == opcao and self.tabuleiro[0][0] == self.tabuleiro[1][1] and self.tabuleiro[0][0] == self.tabuleiro[2][2]: # Vai checar a diagonal da esquerda superior até a direita inferior
                 ganhar = True
                 break
-            elif self.tabuleiro[0][2] == opcao and self.tabuleiro[0][2] == self.tabuleiro[1][1] and self.tabuleiro[2][0]: # vai checar a diagonal da esquerda inferior até a direita superior
+            elif self.tabuleiro[0][2] == opcao and self.tabuleiro[0][2] == self.tabuleiro[1][1] and self.tabuleiro[0][2] == self.tabuleiro[2][0]: # vai checar a diagonal da esquerda inferior até a direita superior
                 ganhar = True
                 break
             else:
@@ -98,19 +98,23 @@ class Jogo:
 
     def deve_continuar(self) -> bool:
         """Pergunta se a pessoa deseja continuar"""
+        from time import sleep
         while True:
             resposta = str(input('Você deseja jogar novamente? [S/N] ')).strip()
             if resposta == '':
                 print('Resposta inválida')
-                return
-            if resposta in 'SsSIMSimsim' or resposta in 'NnNÃOnãonao':
+            elif resposta in 'SsSIMSimsim' or resposta in 'NnNÃOnãonao':
                 while True:
                     if resposta in 'SsSIMSimsim':
                         print('CARREGANDO...')
+                        for c in range(0, 4):
+                            sleep(0.5)
+                            print('')
                         continua = True
                         break
                     elif resposta in 'NnNÃOnãonao':
                         print('FECHANDO JOGO...')
+                        sleep(0.5)
                         continua = False
                         break
                     print('Resposta inválida')
