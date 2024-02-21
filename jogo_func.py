@@ -64,19 +64,38 @@ class Jogo:
     def escolha_pessoa(self) -> int:
         """Onde a pessoa vai escolher"""
         try:
-            self.jogada_pes_linha = int(input('Escolha sua linha: [1, 2, 3]: '))
-            self.jogada_pes_linha -= 1
-            self.jogada_pes_coluna = int(input('Escolha uma coluna [1, 2, 3]: '))
-            self.jogada_pes_coluna -= 1
-            self.tabuleiro[self.jogada_pes_linha][self.jogada_pes_coluna] = self.opcao_player
-            return False
+            while True:
+                self.jogada_pes_linha = int(input('Escolha sua linha: [1, 2, 3]: '))
+                self.jogada_pes_linha -= 1
+                if self.jogada_pc_linha == -1 or self.jogada_pc_linha == 0 or self.jogada_pc_linha == 1:
+                    break
+                else:
+                    print('Escolha inválida')
+            while True:
+                self.jogada_pes_coluna = int(input('Escolha uma coluna [1, 2, 3]: '))
+                self.jogada_pes_coluna -= 1
+                if self.jogada_pc_coluna == -1 and self.jogada_pc_coluna == 0 and self.jogada_pc_coluna == 1:
+                    break
+                else:
+                    print('Escolha inválida')
+            if self.tabuleiro[self.jogada_pes_linha][self.jogada_pes_coluna] == '0':
+                self.tabuleiro[self.jogada_pes_linha][self.jogada_pes_coluna] = self.opcao_player
+                return False
+            else:
+                print('Espaço já ocupado')
+                return True
         except:
             print('Valor inválido')
             return True
         
     def jogar_pc(self) -> list:
         """Define a jogada do PC"""
-        self.jogada_pc_tipo = self.opcao_pc
-        self.jogada_pc_linha = randint(0, 2)
-        self.jogada_pc_coluna = randint(0, 2)
-        self.tabuleiro[self.jogada_pc_linha][self.jogada_pc_coluna] = self.jogada_pc_tipo
+        while True:
+            self.jogada_pc_tipo = self.opcao_pc
+            self.jogada_pc_linha = randint(0, 2)
+            self.jogada_pc_coluna = randint(0, 2)
+            if self.tabuleiro[self.jogada_pc_linha][self.jogada_pc_coluna] == '0':
+                self.tabuleiro[self.jogada_pc_linha][self.jogada_pc_coluna] = self.jogada_pc_tipo
+                break
+            else:
+                continue
