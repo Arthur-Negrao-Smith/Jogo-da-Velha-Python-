@@ -40,7 +40,6 @@ class Jogo:
             print('Perdeu')
         return ganhar
 
-
     def player_comeca(self) -> bool:
         """Define quem começa a jogar"""
         comeca = randint(0, 1)
@@ -57,6 +56,7 @@ class Jogo:
 
     def printar_tabuleiro(self) -> None:
         """Vai printar cada termo do tabuleiro"""
+        print(f"{self.glamour:=^7}")
         for linha in self.tabuleiro:
                 print(f'{linha[0]}  {linha[1]}  {linha[2]} ')
         print(f"{self.glamour:=^7}")
