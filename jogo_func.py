@@ -103,7 +103,7 @@ class Jogo:
             resposta = str(input('Você deseja jogar novamente? [S/N] ')).strip()
             if resposta == '':
                 print('Resposta inválida')
-            elif resposta in 'SsSIMSimsim' or resposta in 'NnNÃOnãonao':
+            elif resposta in 'SsSIMSimsim' or resposta in 'NnNÃOnãonaoNAONão':
                 while True:
                     if resposta in 'SsSIMSimsim':
                         print('CARREGANDO...')
